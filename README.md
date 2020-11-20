@@ -14,13 +14,23 @@ $ ./mvnw spring-boot:run
 
 # Build Image
 
+- spring
+
 ```shell
 $ ./mvnw spring-boot:build-image
 
-$ docker image ls | grep spring                         
+$ docker image ls | grep spring
 demo-spring-app                                                                    0.0.1-SNAPSHOT          f28972791845        40 years ago        257MB
 
 $ docker run -p 8081:8081 demo-spring-app:0.0.1-SNAPSHOT
+```
+
+- cloud native build pack
+
+```shell
+$ ./mvnw clean package
+
+$ pack build side-car-spring:$(./mvnw org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout) -p target/demo-spring-app-0.0.1-SNAPSHOT.jar --builder cloudfoundry/cnb:bionic
 ```
 
 ## Access
@@ -28,4 +38,13 @@ $ docker run -p 8081:8081 demo-spring-app:0.0.1-SNAPSHOT
 ```shell
 $ curl localhost:8081/
 Hello World
+```
+
+## Deploy ECR
+
+```shell
+# side-car-spring は ecr に事前に作った repository
+$ docker tag side-car-spring:0.0.1-SNAPSHOT AWS_ACCOUNTID.dkr.ecr.ap-northeast-1.amazonaws.com/side-car-spring:0.0.1-SNAPSHOT
+
+$ docker push AWS_ACCOUNTID.dkr.ecr.ap-northeast-1.amazonaws.com/side-car-spring:0.0.1-SNAPSHOT
 ```
