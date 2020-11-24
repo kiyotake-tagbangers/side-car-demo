@@ -16,8 +16,14 @@ public class HelloWorldController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping
-    public String hello() {
-        logger.info("side-car-spring");
-        return "Hello World";
+    public String index() {
+        logger.info("index");
+        return "Index";
+    }
+
+    @GetMapping("/hello")
+    public String hello(){
+        logger.info("hello");
+        return "Hello";
     }
 }

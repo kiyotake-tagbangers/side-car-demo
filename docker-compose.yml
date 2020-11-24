@@ -2,16 +2,15 @@ version: '3'
 
 services:
   reverse-proxy:
-    container_name: reverse_proxy_nginx
-    image: nginx
-    volumes:
-      - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
+    container_name: reverse-proxy-nginx
+    build: ./reverse-proxy
+    image: reverse-proxy-nginx
     ports:
       - 80:80
 
   side-car-spring:
     container_name: side-car-spring
     restart: always
-    image: side-car-spring:0.0.1
+    image: demo-spring-app:0.0.1
     ports:
       - 8081:8081
