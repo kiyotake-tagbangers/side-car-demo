@@ -1,0 +1,53 @@
+{
+    "family": "side-car",
+    "executionRoleArn": "ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "512",
+    "memory": "1024",
+    "containerDefinitions": [
+        {
+            "environment": [],
+            "name": "reverse-proxy",
+            "image": "AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/side-car-nginx",
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 80
+                }
+            ],
+            "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "side-car",
+                    "awslogs-region": "ap-northeast-1",
+                    "awslogs-stream-prefix": "awslogs-example",
+                    "awslogs-create-group" : "true"
+                }
+            }
+        },
+        {
+            "name": "side-car-spring",
+            "image": "AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/side-car-spring",
+            "portMappings": [
+                {
+                    "containerPort": 8081,
+                    "hostPort": 8081
+                }
+            ],
+            "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "side-car",
+                    "awslogs-region": "ap-northeast-1",
+                    "awslogs-stream-prefix": "awslogs-example",
+                    "awslogs-create-group" : "true"
+                }
+            }
+        }
+    ]
+}

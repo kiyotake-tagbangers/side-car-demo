@@ -1,0 +1,17 @@
+version: 1
+task_definition:
+  task_execution_role: ecsTaskExecutionRole
+  ecs_network_mode: awsvpc
+  task_size:
+    mem_limit: 0.5GB
+    cpu_limit: 256
+run_params:
+  network_configuration:
+    awsvpc_configuration:
+      subnets:
+        - subnet-0dd108d70b7627789 # private subnets(head towards to nat gateway)
+        - subnet-01234567891011121 # private subnets(head towards to nat gateway)
+        - subnet-31415161718192021 # private subnets(head towards to nat gateway)
+      security_groups:
+        - sg-22232425262728293
+      assign_public_ip: DISABLED

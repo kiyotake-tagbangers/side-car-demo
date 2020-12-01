@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    container_name: reverse-proxy
+    image: AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/side-car-nginx
+    ports:
+      - 80:80
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: fargate
+        awslogs-region: ap-northeast-1
+        awslogs-create-group: "true"
+        awslogs-stream-prefix: "side-car"
+  side-car-spring:
+    container_name: side-car-spring
+    restart: always
+    image: AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/side-car-spring
+    ports:
+      - 8081:8081
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: fargate
+        awslogs-region: ap-northeast-1
+        awslogs-create-group: "true"
+        awslogs-stream-prefix: "side-car"
