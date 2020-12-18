@@ -1,5 +1,6 @@
 package com.kiyotagbangers.demo.controller;
 
+import com.kiyotagbangers.demo.MyData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,16 @@ public class HelloWorldController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private MyData myData;
+
+    public HelloWorldController(MyData myData) {
+        this.myData = myData;
+    }
+
     @GetMapping
-    public String index() {
+    public MyData index() {
         logger.info("index");
-        return "Index";
+        return this.myData;
     }
 
     @GetMapping("/hello")

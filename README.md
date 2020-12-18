@@ -13,8 +13,9 @@ OpenJDK 64-Bit Server VM 18.9 (build 11.0.2+9, mixed mode)
 $ ./mvnw clean package
 $ ./mvnw spring-boot:run
 
+# default profile
 $ curl localhost:8081/
-index
+{"profile":"default","message":"hello, default"}
 
 $ curl localhost:8081/hello
 hello
@@ -58,7 +59,7 @@ $ curl http://localhost
 nginx index page
 
 $ curl http://localhost/spring
-Index
+{"profile":"default","message":"hello, default"}
 
 $ curl http://localhost/spring/hello
 Hello

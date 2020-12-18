@@ -6,3 +6,6 @@ management:
     web:
       exposure:
         include: health
+
+message:
+  value: "hello, default"
