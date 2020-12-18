@@ -12,5 +12,7 @@ services:
     container_name: side-car-spring
     restart: always
     image: demo-spring-app:0.0.1
+    environment:
+      - spring.profiles.active=development
     ports:
       - 8081:8081

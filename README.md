@@ -112,16 +112,15 @@ clusters:
     region: ap-northeast-1
     default_launch_type: ""
 
-
-$ ecs-cli compose -f ./side-car.yml service up \
---launch-type FARGATE \
+$ ecs-cli compose --project-name side-car \
+--file ./side-car.yml \
+service up \
 --target-groups \
-"targetGroupArn=arn:aws:elasticloadbalancing:ap-northeast-1:AWS_ACCOUNT_ID:targetgroup/side-car/abcdefghijklmnop,containerName=reverse-proxy,containerPort=80"
+"targetGroupArn=arn:aws:elasticloadbalancing:ap-northeast-1:216232036342:targetgroup/side-car/86c9b3f787418801,containerName=reverse-proxy,containerPort=31000"
 
-$ ecs-cli compose --project-name demo-spring-app service ps
+$ ecs-cli compose --project-name side-car service ps
 
-
-$ ecs-cli compose --project-name demo-spring-app service down
+$ ecs-cli compose --project-name side-car service down
 ```
 
 ### Using awscli
