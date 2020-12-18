@@ -6,7 +6,7 @@ services:
     build: ./reverse-proxy
     image: reverse-proxy-nginx
     ports:
-      - 80:80
+      - 80:31000
 
   side-car-spring:
     container_name: side-car-spring
