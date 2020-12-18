@@ -28,9 +28,9 @@ hello
 $ ./mvnw spring-boot:build-image
 
 $ docker image ls | grep spring
-demo-spring-app                                                                    0.0.1-SNAPSHOT          f28972791845        40 years ago        257MB
+demo-spring-app                                                                    0.0.1          f28972791845        40 years ago        257MB
 
-$ docker run -p 8081:8081 demo-spring-app:0.0.1-SNAPSHOT
+$ docker run -p 8081:8081 demo-spring-app:0.0.1
 ```
 
 - cloud native build pack
@@ -44,6 +44,8 @@ $ pack build side-car-spring:$(./mvnw org.apache.maven.plugins:maven-help-plugin
 ## Running side-car container pattern
 
 ```shell
+$ docker-compose build
+
 $ docker-compose up -d
 
 $ docker-compose ps
@@ -97,7 +99,7 @@ $ docker push AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/side-car-nginx
 
 ```shell
 # Amazon ECS CLI で使用する ECS クラスター名を設定
-$ ecs-cli configure --region ap-northeast-1 --cluster side-car
+$ ecs-cli configure --region ap-northeast-1 --cluster side-car --default-launch-type FARGATE
 
 # 設定の確認
 $ \cat ~/.ecs/config
@@ -117,7 +119,6 @@ $ ecs-cli compose -f ./side-car.yml service up \
 
 $ ecs-cli compose --project-name demo-spring-app service ps
 
-arn:aws:elasticloadbalancing:ap-northeast-1:AWS_ACCOUNT_ID:targetgroup/side-car/abcdefghijklmnop
 
 $ ecs-cli compose --project-name demo-spring-app service down
 ```
