@@ -116,7 +116,7 @@ $ ecs-cli compose --project-name side-car \
 --file ./side-car.yml \
 service up \
 --target-groups \
-"targetGroupArn=arn:aws:elasticloadbalancing:ap-northeast-1:216232036342:targetgroup/side-car/86c9b3f787418801,containerName=reverse-proxy,containerPort=31000"
+"targetGroupArn=arn:aws:elasticloadbalancing:ap-northeast-1:AWS_ACCOUNT_ID:targetgroup/side-car/86c9b3f787418801,containerName=reverse-proxy,containerPort=31000"
 
 $ ecs-cli compose --project-name side-car service ps
 
@@ -148,7 +148,7 @@ $ aws ecs create-service \
     --desired-count 1 \
     --launch-type FARGATE \
     --platform-version LATEST \
-    --network-configuration "awsvpcConfiguration={subnets=[subnet-0dd108d70b7627789, subnet-0a3f62289c4ab3bbe],securityGroups=[sg-0f2ce7ffcf425fcf8],assignPublicIp=DISABLED}" \
+    --network-configuration "awsvpcConfiguration={subnets=[subnet-aaaaaaaaaaaaaaa, subnet-aaaaaaaaaa],securityGroups=[sg-0f2ce7ffcf425fcf8],assignPublicIp=DISABLED}" \
     --load-balancers "targetGroupArn=arn:aws:elasticloadbalancing:ap-northeast-1:AWS_ACCOUNT_ID:targetgroup/side-car/abcdefghijklmnop,containerName=reverse-proxy,containerPort=80"
 
 # 削除
